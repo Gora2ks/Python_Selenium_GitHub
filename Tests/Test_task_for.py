@@ -1,18 +1,13 @@
-import unittest.mock
 from selenium import webdriver
-import pytest
 import unittest
 from Page_Patterns.loginPage import LoginPage
-from Locators.locators import Locators
 
 
 class Login(unittest.TestCase):
 
-    def test_Registration_form(self):
+    def test_LoginPage(self):
         driver = webdriver.Chrome()
-        driver.get(Locators.url_source)
-        lg = LoginPage(driver)
-        lg.Write_First_Name("Gora")
-        lg.Write_Last_Name("Wroclaw")
-        lg.Submit_button()
-        # self.driver.quit()s
+        driver.get("D:\Develop\Python_source\Python_Selenium_GitHub\Sources\index2 (2) (1) (2) (1).html")
+
+        lp = LoginPage(driver)
+        lp.login("Gora", "Wroclaw")

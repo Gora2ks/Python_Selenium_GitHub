@@ -1,6 +1,4 @@
 from selenium.webdriver.common.by import By
-
-from Locators.locators import Locators
 from Base.selenium_driver import SeleniumDriver
 
 
@@ -11,32 +9,27 @@ class LoginPage(SeleniumDriver):
         super().__init__(driver)
         self.driver = driver
 
+    # Locators
+    _firstNameBox = "firstname-input"
+    _lastnameBox = "lastname-input"
+    _username_textbox = ""
+    _password_textbox = ""
+    _submitButton = "submit-button"
+
     def Write_First_Name(self, firstName):
-        firstField = self.driver.find_element(By.ID, Locators.lastname_textbox_id)
-        firstField.click()
-        firstField.is_enabled()
-        firstField.clear()
-        firstField.send_keys(firstName)
+        self.sendKeys(firstName, self._firstNameBox)
+        # return self.driver.find_element(By.ID, self._firstNameBox)
 
     def Write_Last_Name(self, lastName):
-        lastField = self.driver.find_element(By.ID, Locators.lastname_textbox_id)
-        lastField.click()
-        lastField.is_enabled()
-        lastField.clear()
-        lastField.send_keys(lastName)
+        self.sendKeys(lastName,self._lastnameBox)
+        # return self.driver.find_element(By.ID, self._lastnameBox)
 
     def Submit_button(self):
-        submit = self.driver.find_element(By.ID, Locators.submit_button_id)
-        submit.click()
+        self.elementClick(self._submitButton, locatorType="id")
+        # return self.driver.find_element(By.ID, self._submitButton)
 
-    #
-    # def enter_Last_Name(self, username):
-    #     ##      self.driver.find_element_by_xpath_selector(self.username_texbox_id).clear()
-    #     try:
-    #         self.driver.find_element_by_css_selector(self.username_texbox_id).send_keys(username)
-    #     except:
-    #         return None
+    def login(self, firstName, lastName):
+        self.Write_First_Name(firstName)
+        self.Write_Last_Name(lastName)
+        self.Submit_button()
 
-    # # def wait_for_login_page(self):
-    # #     wait = WebDriverWait(self.driver, 30)
-    # # wait.until(EC.title_is("Facebook – log in or sign up"))
